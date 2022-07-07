@@ -19,20 +19,62 @@
     .hover\:bg-sky-700:hover {
         background-color: #02a5ab;
     }
+    .hover\:bg-sky-750:hover {
+        background-color: #02a5ab;
+    }
+    .text-teal-100 {
+        background-color: black;
+        border: 2.5px solid rgb(0, 255, 255);
+    }
 </style>
 <div class = "fixed text-white text-sm ml-3 mt-2 select-none font-mono">
     <span>Score: </span>
     <span id = "score">0</span>
 </div>
-<div class = "fixed inset-0 flex items-center justify-center text-white font-mono" id = "get_started">
+
+<div class = "fixed inset-0 flex items-center justify-center text-white font-mono" id = "menu">
+    <div class = "bg-black max-w-md w-full p-3 text-center rounded-xl">
+        <!-- <h1 class = "text-6xl font-bold text-center leading-tight" id = "final_score">0</h1> -->
+        <p class = "text-6xl font-bold text-white text-center mb-4 leading-tight">2PI</p>
+        <p class = "text-sm font-bold text-white text-left mb-4 ml-2 leading-tight">
+            ⨠ Save yourself at the centre of the screen,<br>from the randomly spawned enemies!   
+            <br><br>
+            ⨠ Use your mouse to play. Point in any direction<br>and left click to shoot a projectile.
+            <br><br>
+            ⨠ You're awarded 10 points for shrinking<br>the enemies and 50 points to eliminate the enemies.
+            <br><br>
+            ⨠ To come back here,<br>click on return to main menu.
+            <br><br>
+            
+            <p class = "text-base text-left font-bold text-white leading-relaxed mb-2 ml-2">
+                Difficulty:
+            </p>
+        </p> 
+        <div>
+            <button class = "text-lg font-bold w-full mb-3 rounded-xl hover:bg-sky-750 font-bold text-3xl text-left" id = "ez"><p class = "ml-1">Easy</p></button>
+        </div>
+        <div>
+            <button class = "text-lg font-bold w-full mb-3 rounded-xl hover:bg-sky-750 font-bold text-3xl text-left" id = "mid"><p class = "ml-1">Medium</p></button>
+        </div>
+        <div>
+            <button class = "text-lg font-bold w-full mb-3 rounded-xl hover:bg-sky-750 font-bold text-3xl text-left" id = "hard"><p class = "ml-1">Hard</p></button>
+        </div>
+        <p class = " rounded-lg text-sm w-full font-bold text-center text-teal-100 mt-1 mb-1">
+            P.S. press f11 and then f5 for the best experience
+        </p>
+    </div>
+</div>
+
+<div class = "fixed inset-0 items-center justify-center text-white font-mono" id = "get_started">
     <div class = "bg-black max-w-md w-full p-4 text-center rounded-xl">
         <h1 class = "text-6xl font-bold text-center leading-tight" id = "final_score">0</h1>
         <p class = "text-sm text-gray-750 text-center mb-4">Points</p>
         <div>
-            <button class = "text-lg font-bold w-full rounded-xl hover:bg-sky-700 font-bold text-3xl" id = "start">START</button>
+            <button class = "text-lg font-bold w-full rounded-xl hover:bg-sky-700 font-bold text-3xl" id = "gtmenu">Return to Main Menu</button>
         </div>
     </div>
 </div>
+
 <canvas></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src = "./game.js" ></script>
