@@ -1,13 +1,18 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d')
 const score = document.querySelector('#score')
-const start = document.querySelector('#start')
 const get_started = document.querySelector('#get_started')
 const final_score = document.querySelector('#final_score')
+const menu = document.querySelector('#menu')
+const ez = document.querySelector('#ez')
+const mid = document.querySelector('#mid')
+const hard = document.querySelector('#hard')
+const gtmenu = document.querySelector('#gtmenu')
+ 
+get_started.style.display = 'none'
 
 canvas.width = innerWidth
 canvas.height = innerHeight
-
 
 class Player {
     constructor(x, y, radius, color) {
@@ -116,21 +121,21 @@ let enemies = []
 let particles = []
 let animationID
 let current_score = 0
-let restart_count = 0
+
 function init() {
-    restart_count += 1
+    enemies = []
     player = new Player(x, y, 10, "white")                                                
     projectiles = []
-    enemies = []
     particles = []
     current_score = 0
     score.innerHTML = current_score
     final_score.innerHTML = current_score
 }
-function spawnEnemies() {
+
+function spawnEnemies(difficulty) {
     setInterval(() => {
         // This specifiies that the radius of our enemies can take any value between 15 and 60
-        const radius = Math.random() * (60 - 15) + 15
+        const radius = Math.random() * (60 - 20) + 20
         let x
         let y
         // This if else block makes sure that enemies are spawned from the boundaries of our canvas, randomly.
@@ -153,7 +158,7 @@ function spawnEnemies() {
     }
 
         enemies.push(new Enemy(x, y, radius, color, velocity))
-    }, 1000 * (2**restart_count)) // 1000 is the time in milisecs after which a new enemy is spawned
+    }, difficulty)
 }
 
 // requestAnimationFrame(animate) calls itself on loop infinitely once we call animate().
@@ -193,7 +198,8 @@ function animate() {
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
         if (dist - enemy.radius - player.radius < 0.5) {
             cancelAnimationFrame(animationID)
-            get_started.style.display = 'flex'
+            let popup = document.getElementsByClassName("popup")[0]
+            get_started.style.display = "flex"
             final_score.innerHTML = current_score
         }
 
@@ -208,7 +214,7 @@ function animate() {
                     // Math.random() * 2 ensures that particle radius will take any value between 0 and 2
                     particles.push(new Particle(projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * (Math.random() * 7), y: (Math.random() - 0.5) * (Math.random() * 7)}))
                 }
-                if (enemy.radius - 10 > 15) {
+                if (enemy.radius - 10 > 20) {
                     // Incrementing score by 10 for shrinking an enemy
                     current_score += 10
                     score.innerHTML = current_score
@@ -232,6 +238,7 @@ function animate() {
     })
 }
 
+// projectile initiator
 addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = {
@@ -241,10 +248,27 @@ addEventListener('click', (event) => {
     projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 4, 'white', velocity))
 })
 
-// What happens when we click 'START' 
-start.addEventListener('click', () => {
+// Difficulty settings
+ez.addEventListener('click', () => {
     init()
     animate()
-    spawnEnemies()
-    get_started.style.display = 'none'
+    spawnEnemies(1600)
+    menu.style.display = 'none'
+})
+mid.addEventListener('click', () => {
+    init()
+    animate()
+    spawnEnemies(1250)
+    menu.style.display = 'none'
+})
+hard.addEventListener('click', () => {
+    init()
+    animate()
+    spawnEnemies(850)
+    menu.style.display = 'none'
+})
+
+// Return to main menu
+gtmenu.addEventListener('click', () => {
+    document.location.reload(true)
 })
